@@ -11,353 +11,298 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-–gold: #C9A227;
-–gold-dim: #9A7B1E;
-–bg: #080808;
-–card: #0F0F0F;
-–border: #1C1C1C;
-–text: #E8E0D0;
-–text-dim: #8A8070;
-–serif: ‘Cormorant Garamond’, ‘EB Garamond’, Georgia, serif;
-–mono: ‘DM Mono’, ‘Courier New’, monospace;
-–green: #4CAF50;
-–flat: #90A4AE;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-background: var(–bg);
-color: var(–text);
-font-family: var(–serif);
-min-height: 100vh;
-padding: 0;
-position: relative;
-overflow-x: hidden;
-}
-
-body::before {
-content: ‘’;
-position: fixed;
-inset: 0;
-background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.03’/%3E%3C/svg%3E”);
-pointer-events: none;
-z-index: 0;
-opacity: 0.5;
-}
-
-.wrap {
-max-width: 820px;
-margin: 0 auto;
-padding: 40px 24px 80px;
-position: relative;
-z-index: 1;
-}
-
-header { text-align: center; margin-bottom: 36px; }
-
-.rule {
-height: 1px;
-background: linear-gradient(90deg, transparent, var(–gold), transparent);
-margin: 10px 0;
-}
-
-.dateline {
-font-family: var(–mono);
-font-size: 10px;
-letter-spacing: 0.2em;
-color: var(–text-dim);
-margin: 8px 0 4px;
-text-transform: uppercase;
-}
-
-h1.masthead {
-font-size: clamp(38px, 9vw, 68px);
-letter-spacing: 0.12em;
-font-weight: 300;
-margin: 4px 0 2px;
-line-height: 1;
-}
-.masthead-gold { color: var(–gold); }
-.masthead-white { color: var(–text); }
-
-.subtitle {
-font-family: var(–mono);
-font-size: 9px;
-letter-spacing: 0.35em;
-color: var(–text-dim);
-margin: 4px 0 8px;
-text-transform: uppercase;
-}
-
-.gen-note {
-font-family: var(–mono);
-font-size: 9px;
-color: var(–text-dim);
-opacity: 0.6;
-margin: 6px 0 0;
-letter-spacing: 0.05em;
-}
-
-.pills-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 12px;
-margin-bottom: 10px;
-}
-
-@media (max-width: 480px) {
-.pills-grid { grid-template-columns: 1fr; }
-}
-
-.pill {
-background: var(–card);
-border: 1px solid var(–border);
-border-top: 2px solid var(–gold-dim);
-padding: 16px 18px;
-border-radius: 2px;
-}
-
-.pill-label {
-font-family: var(–mono);
-font-size: 8px;
-letter-spacing: 0.2em;
-color: var(–gold-dim);
-text-transform: uppercase;
-margin-bottom: 8px;
-}
-
-.pill-value-row {
-display: flex;
-align-items: baseline;
-gap: 7px;
-margin-bottom: 5px;
-}
-
-.pill-value {
-font-size: clamp(22px, 4vw, 30px);
-font-weight: 300;
-color: var(–text);
-letter-spacing: -0.01em;
-}
-
-.pill-trend { font-size: 20px; font-weight: 400; }
-.trend-down { color: var(–green); }
-.trend-flat { color: var(–flat); }
-
-.pill-sub {
-font-family: var(–mono);
-font-size: 9px;
-color: var(–text-dim);
-margin-bottom: 3px;
-}
-
-.pill-note {
-font-family: var(–mono);
-font-size: 8.5px;
-color: var(–gold-dim);
-opacity: 0.85;
-}
-
-.context-bar {
-background: #0A0A0A;
-border: 1px solid var(–border);
-padding: 8px 16px;
-margin-bottom: 16px;
-border-radius: 1px;
-}
-
-.context-bar span {
-font-family: var(–mono);
-font-size: 9px;
-color: var(–text-dim);
-letter-spacing: 0.05em;
-}
-
-.fomc-banner {
-background: linear-gradient(135deg, #0D0A04, #130F05);
-border: 1px solid var(–gold-dim);
-border-radius: 2px;
-padding: 14px 18px;
-margin-bottom: 32px;
-display: flex;
-align-items: flex-start;
-gap: 14px;
-flex-wrap: wrap;
-}
-
-.fomc-tag {
-font-family: var(–mono);
-font-size: 9px;
-letter-spacing: 0.2em;
-color: var(–gold);
-background: #1A1200;
-border: 1px solid var(–gold-dim);
-padding: 3px 8px;
-border-radius: 1px;
-flex-shrink: 0;
-margin-top: 1px;
-}
-
-.fomc-text {
-font-family: var(–mono);
-font-size: 11px;
-color: var(–text-dim);
-line-height: 1.65;
-letter-spacing: 0.02em;
-}
-
-.fomc-text strong { color: var(–text); }
-
-.news-section { margin-bottom: 36px; }
-
-.section-header {
-display: flex;
-align-items: center;
-gap: 10px;
-margin-bottom: 16px;
-}
-
-.section-icon { color: var(–gold); font-size: 17px; flex-shrink: 0; }
-
-.section-title {
-font-family: var(–mono);
-font-size: 10px;
-letter-spacing: 0.25em;
-color: var(–gold);
-font-weight: 500;
-flex-shrink: 0;
-}
-
-.section-rule {
-flex: 1;
-height: 1px;
-background: linear-gradient(90deg, #9A7B1E66, transparent);
-}
-
-.story-card {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 2px;
-margin-bottom: 10px;
-overflow: hidden;
-transition: border-color 0.2s;
-}
-
-.story-card:hover { border-color: #2A2A2A; }
-
-.story-btn {
-width: 100%;
-background: none;
-border: none;
-padding: 16px 18px;
-cursor: pointer;
-text-align: left;
-color: inherit;
-font-family: inherit;
-display: block;
-}
-
-.story-meta {
-display: flex;
-gap: 7px;
-align-items: center;
-margin-bottom: 7px;
-}
-
-.story-date {
-font-family: var(–mono);
-font-size: 9px;
-color: var(–gold-dim);
-letter-spacing: 0.1em;
-}
-
-.story-sep { color: var(–border); font-size: 11px; }
-
-.story-source {
-font-family: var(–mono);
-font-size: 9px;
-color: var(–text-dim);
-letter-spacing: 0.05em;
-text-transform: uppercase;
-}
-
-.story-headline-row {
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-gap: 14px;
-}
-
-.story-headline {
-font-size: clamp(15px, 2.5vw, 19px);
-font-weight: 400;
-line-height: 1.35;
-color: var(–text);
-letter-spacing: 0.01em;
-flex: 1;
-}
-
-.story-chevron {
-font-family: var(–mono);
-font-size: 20px;
-color: var(–gold-dim);
-flex-shrink: 0;
-line-height: 1;
-margin-top: 2px;
-}
-
-.story-body {
-padding: 0 18px 18px;
-display: none;
-}
-
-.story-body.open { display: block; }
-
-.story-divider {
-height: 1px;
-background: var(–border);
-margin-bottom: 14px;
-}
-
-.story-text {
-font-size: 15px;
-line-height: 1.75;
-color: var(–text-dim);
-letter-spacing: 0.01em;
-}
-
-footer { text-align: center; margin-top: 48px; }
-
-.footer-text {
-font-family: var(–mono);
-font-size: 9px;
-color: var(–text-dim);
-opacity: 0.5;
-letter-spacing: 0.1em;
-margin: 7px 0;
-text-transform: uppercase;
-}
-
-.footer-text.small { opacity: 0.35; margin-top: 4px; font-size: 8px; }
-
-@keyframes fadeIn {
-from { opacity: 0; transform: translateY(8px); }
-to   { opacity: 1; transform: translateY(0); }
-}
-
-header, .pills-grid, .context-bar, .fomc-banner, .news-section {
-animation: fadeIn 0.5s ease both;
-}
-.pills-grid    { animation-delay: 0.05s; }
-.context-bar   { animation-delay: 0.1s; }
-.fomc-banner   { animation-delay: 0.15s; }
-.news-section:nth-child(1) { animation-delay: 0.2s; }
-.news-section:nth-child(2) { animation-delay: 0.25s; }
+  :root {
+    --gold: #C9A227;
+    --gold-dim: #9A7B1E;
+    --bg: #080808;
+    --card: #0F0F0F;
+    --border: #1C1C1C;
+    --text: #E8E0D0;
+    --text-dim: #8A8070;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --mono: 'DM Mono', 'Courier New', monospace;
+    --green: #4CAF50;
+    --flat: #90A4AE;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #080808;
+    background-color: #080808;
+    color: var(--text);
+    font-family: var(--serif);
+    min-height: 100vh;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+  header { text-align: center; margin-bottom: 36px; }
+  .rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #C9A227, transparent);
+    margin: 10px 0;
+  }
+  .dateline {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    margin: 8px 0 4px;
+    text-transform: uppercase;
+  }
+  h1.masthead {
+    font-size: clamp(38px, 9vw, 68px);
+    letter-spacing: 0.12em;
+    font-weight: 300;
+    margin: 4px 0 2px;
+    line-height: 1;
+  }
+  .masthead-gold { color: #C9A227; }
+  .masthead-white { color: #E8E0D0; }
+  .subtitle {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: var(--text-dim);
+    margin: 4px 0 8px;
+    text-transform: uppercase;
+  }
+  .gen-note {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    opacity: 0.6;
+    margin: 6px 0 0;
+    letter-spacing: 0.05em;
+  }
+  .pills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  @media (max-width: 480px) { .pills-grid { grid-template-columns: 1fr; } }
+  .pill {
+    background: #0F0F0F;
+    border: 1px solid #1C1C1C;
+    border-top: 2px solid #9A7B1E;
+    padding: 16px 18px;
+    border-radius: 2px;
+  }
+  .pill-label {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    color: #9A7B1E;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pill-value-row {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    margin-bottom: 5px;
+  }
+  .pill-value {
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 300;
+    color: #E8E0D0;
+    letter-spacing: -0.01em;
+  }
+  .pill-trend { font-size: 20px; font-weight: 400; }
+  .trend-down { color: #4CAF50; }
+  .trend-flat { color: #90A4AE; }
+  .pill-sub {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    margin-bottom: 3px;
+  }
+  .pill-note {
+    font-family: var(--mono);
+    font-size: 8.5px;
+    color: #9A7B1E;
+    opacity: 0.85;
+  }
+  .context-bar {
+    background: #0A0A0A;
+    border: 1px solid #1C1C1C;
+    padding: 8px 16px;
+    margin-bottom: 16px;
+    border-radius: 1px;
+  }
+  .context-bar span {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+  .fomc-banner {
+    background: linear-gradient(135deg, #0D0A04, #130F05);
+    border: 1px solid #9A7B1E;
+    border-radius: 2px;
+    padding: 14px 18px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .fomc-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: #C9A227;
+    background: #1A1200;
+    border: 1px solid #9A7B1E;
+    padding: 3px 8px;
+    border-radius: 1px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .fomc-text {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.65;
+    letter-spacing: 0.02em;
+  }
+  .fomc-text strong { color: #E8E0D0; }
+  .news-section { margin-bottom: 36px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .section-icon { color: #C9A227; font-size: 17px; flex-shrink: 0; }
+  .section-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: #C9A227;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, #9A7B1E66, transparent);
+  }
+  .story-card {
+    background: #0F0F0F;
+    border: 1px solid #1C1C1C;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .story-card:hover { border-color: #2A2A2A; }
+  .story-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 16px 18px;
+    cursor: pointer;
+    text-align: left;
+    color: inherit;
+    font-family: inherit;
+    display: block;
+  }
+  .story-meta {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    margin-bottom: 7px;
+  }
+  .story-date {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: #9A7B1E;
+    letter-spacing: 0.1em;
+  }
+  .story-sep { color: #1C1C1C; font-size: 11px; }
+  .story-source {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .story-headline-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .story-headline {
+    font-size: clamp(15px, 2.5vw, 19px);
+    font-weight: 400;
+    line-height: 1.35;
+    color: #E8E0D0;
+    letter-spacing: 0.01em;
+    flex: 1;
+  }
+  .story-chevron {
+    font-family: var(--mono);
+    font-size: 20px;
+    color: #9A7B1E;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .story-body { padding: 0 18px 18px; display: none; }
+  .story-body.open { display: block; }
+  .story-divider {
+    height: 1px;
+    background: #1C1C1C;
+    margin-bottom: 14px;
+  }
+  .story-text {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text-dim);
+    letter-spacing: 0.01em;
+  }
+  footer { text-align: center; margin-top: 48px; }
+  .footer-text {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    opacity: 0.5;
+    letter-spacing: 0.1em;
+    margin: 7px 0;
+    text-transform: uppercase;
+  }
+  .footer-text.small { opacity: 0.35; margin-top: 4px; font-size: 8px; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  header, .pills-grid, .context-bar, .fomc-banner, .news-section {
+    animation: fadeIn 0.5s ease both;
+  }
+  .pills-grid    { animation-delay: 0.05s; }
+  .context-bar   { animation-delay: 0.1s; }
+  .fomc-banner   { animation-delay: 0.15s; }
+  .news-section:nth-child(1) { animation-delay: 0.2s; }
+  .news-section:nth-child(2) { animation-delay: 0.25s; }
 </style>
-
 </head>
 <body>
 <div class="wrap">
@@ -404,7 +349,7 @@ animation: fadeIn 0.5s ease both;
   </div>
 
   <div class="context-bar">
-    <span>MND 6.04% · Freddie Mac 6.01% (Feb 19) · 15-yr fixed 5.41% · Core PCE Dec '25: 3.0% — Fed's preferred gauge still 1pt above target</span>
+    <span>MND 6.04% · Freddie Mac 6.01% (Feb 19) · 15-yr fixed 5.41% · Core PCE Dec '25: 3.0% — still 1pt above Fed target</span>
   </div>
 
   <div class="fomc-banner">
@@ -437,7 +382,7 @@ animation: fadeIn 0.5s ease both;
   </button>
   <div class="story-body">
     <div class="story-divider"></div>
-    <p class="story-text">Mortgage News Daily hit 6.04% Friday — the second-lowest in three years — while Freddie Mac's weekly survey showed 6.01%, its lowest since September 2022. But the same day, the BEA released December PCE data showing core inflation at 3.0%, a full percentage point above the Fed's 2% target. The two data points in one day told the story of 2026: rates are falling, but the Fed has little room to accelerate cuts. Zillow's Sunday morning rate shows 5.86%, reflecting weekend lender adjustments ahead of spring market season.</p>
+    <p class="story-text">Mortgage News Daily hit 6.04% Friday — the second-lowest in three years — while Freddie Mac's weekly survey showed 6.01%, its lowest since September 2022. But the same day, the BEA released December PCE data showing core inflation at 3.0%, a full percentage point above the Fed's 2% target. The two data points in one day told the story of 2026: rates are falling, but the Fed has little room to accelerate cuts.</p>
   </div>
 </article>
 
@@ -455,7 +400,7 @@ animation: fadeIn 0.5s ease both;
   </button>
   <div class="story-body">
     <div class="story-divider"></div>
-    <p class="story-text">January existing home sales fell to a 3.91M annualized pace — the slowest since December 2023 and the biggest single-month drop since February 2022. NAR called it a "new housing crisis," though Chief Economist Lawrence Yun noted affordability is at its best level since March 2022. National days on market hit 64 days in January, the longest in six years. The silver lining: mid-February showed demand rebounding as winter weather effects faded, with pending sales and new listings rising and price cuts easing.</p>
+    <p class="story-text">January existing home sales fell to a 3.91M annualized pace — the slowest since December 2023 and the biggest single-month drop since February 2022. NAR called it a "new housing crisis," though Chief Economist Lawrence Yun noted affordability is at its best level since March 2022. National days on market hit 64 days in January, the longest in six years.</p>
   </div>
 </article>
 
@@ -473,7 +418,7 @@ animation: fadeIn 0.5s ease both;
   </button>
   <div class="story-body">
     <div class="story-divider"></div>
-    <p class="story-text">A sweeping bipartisan housing bill passed the House by a near-unanimous margin, targeting regulatory barriers, streamlined construction approvals, and expanded financing to boost supply. Notably, Trump's proposal to ban institutional investors from buying single-family homes was stripped from the bill before passage — no formal legislative language was ever submitted. The White House is separately pursuing an executive order targeting investors owning 100+ properties. The bill now moves to the Senate.</p>
+    <p class="story-text">A sweeping bipartisan housing bill passed the House by a near-unanimous margin, targeting regulatory barriers, streamlined construction approvals, and expanded financing to boost supply. Trump's proposal to ban institutional investors from buying single-family homes was stripped from the bill before passage. The bill now moves to the Senate.</p>
   </div>
 </article>
 
@@ -491,7 +436,7 @@ animation: fadeIn 0.5s ease both;
   </button>
   <div class="story-body">
     <div class="story-divider"></div>
-    <p class="story-text">Redfin data shows a record gap between sellers and buyers nationally — but the story splits sharply by geography. Overbuilt Sun Belt metros like Denver and much of Florida are seeing meaningful price reductions and rising days on market. Supply-constrained Northeast and Midwest markets are holding firm or appreciating. Realtor.com's 2026 forecast projects prices rising in 78 cities and declining in 22 — almost all declines concentrated in Southeast and West markets. Rochester sits firmly in the winning column, and buyers here have not received the national "buyer's market" shift.</p>
+    <p class="story-text">Redfin data shows a record gap between sellers and buyers nationally — but the story splits sharply by geography. Overbuilt Sun Belt metros like Denver and much of Florida are seeing meaningful price reductions. Supply-constrained Northeast and Midwest markets are holding firm. Realtor.com projects prices rising in 78 cities and declining in 22 — almost all declines in Southeast and West markets. Rochester buyers have not received the national "buyer's market" shift.</p>
   </div>
 </article>
 
@@ -509,7 +454,7 @@ animation: fadeIn 0.5s ease both;
   </button>
   <div class="story-body">
     <div class="story-divider"></div>
-    <p class="story-text">Opendoor posted Q4 revenue of $736M — beating analyst estimates of $595M — and shares surged 18%+ despite a headline $1.1B GAAP loss (driven by $933M in one-time debt charges). CEO Kaz Nejatian pointed to a 46% quarter-over-quarter increase in home acquisitions as evidence the "Opendoor 2.0" AI-native model is working. The company targets breakeven by end of 2026. Worth watching: if iBuying recovers at scale, it changes the competitive landscape for traditional brokerages nationwide.</p>
+    <p class="story-text">Opendoor posted Q4 revenue of $736M — beating analyst estimates of $595M — and shares surged 18%+ despite a headline $1.1B GAAP loss driven by one-time debt charges. CEO Kaz Nejatian pointed to a 46% quarter-over-quarter increase in home acquisitions as evidence the "Opendoor 2.0" AI-native model is working. The company targets breakeven by end of 2026.</p>
   </div>
 </article>
 ```
@@ -538,7 +483,7 @@ animation: fadeIn 0.5s ease both;
   </button>
   <div class="story-body">
     <div class="story-divider"></div>
-    <p class="story-text">Rochester's January 2026 data confirms the market remains among the tightest in the nation. Median sale price: $165K (+13% YoY). Average days on market: 15 (vs. 16 last year). Average offers per listing: 6. Sale-to-list ratio: 107%, with 65.8% of homes selling above asking. Only 109 sales closed — down from 136 last January — not because demand fell, but because inventory did: just 90 active homes, down 32.8% YoY. Rochester's median remains 60% below the national median of $396,800.</p>
+    <p class="story-text">Rochester's January 2026 data confirms the market remains among the tightest in the nation. Median sale price: $165K (+13% YoY). Average days on market: 15 (vs. 16 last year). Average offers per listing: 6. Sale-to-list ratio: 107%, with 65.8% of homes selling above asking. Only 109 sales closed — down from 136 — not because demand fell, but because inventory did: just 90 active homes, down 32.8% YoY.</p>
   </div>
 </article>
 
@@ -556,7 +501,7 @@ animation: fadeIn 0.5s ease both;
   </button>
   <div class="story-body">
     <div class="story-divider"></div>
-    <p class="story-text">Rochester's apartment market moved from landlord-favorable to balanced in 2025, per Realtor.com data reported by the Rochester Business Journal. Rental rate growth slowed to just 0.5% for the year as vacancy climbed to 6.6% — a notable cooling after years of tight supply. The for-sale market remains intensely competitive while renters gain more negotiating room. For Elysian, this is a timely data point for fence-sitting buyer clients currently renting: the case for buying just got stronger.</p>
+    <p class="story-text">Rochester's apartment market moved from landlord-favorable to balanced in 2025. Rental rate growth slowed to just 0.5% for the year as vacancy climbed to 6.6%. The for-sale market remains intensely competitive while renters gain more negotiating room — a timely data point for fence-sitting buyer clients currently renting.</p>
   </div>
 </article>
 
@@ -574,7 +519,7 @@ animation: fadeIn 0.5s ease both;
   </button>
   <div class="story-body">
     <div class="story-divider"></div>
-    <p class="story-text">Governor Hochul promised Rochester $225 million in state investment, with waterfront revitalization and housing among the top priorities. City officials pointed to the Aqueduct Reimagined project and redevelopment of the former Vacuum Oil site on the Genesee River as high-probability recipients. Combined with the active Mt. Hope Avenue RFP for a 2-acre waterfront development site, the Genesee River corridor is emerging as the next major real estate development frontier in Monroe County.</p>
+    <p class="story-text">Governor Hochul promised Rochester $225 million in state investment, with waterfront revitalization and housing among the top priorities. City officials pointed to the Aqueduct Reimagined project and redevelopment of the former Vacuum Oil site on the Genesee River as high-probability recipients. The Genesee River corridor is emerging as the next major real estate development frontier in Monroe County.</p>
   </div>
 </article>
 
@@ -592,7 +537,7 @@ animation: fadeIn 0.5s ease both;
   </button>
   <div class="story-body">
     <div class="story-divider"></div>
-    <p class="story-text">Realtor.com evaluated the 100 largest U.S. cities and ranked Rochester #2, projecting 5.3% home sales growth and 10.3% median sale price appreciation — the strongest price forecast in the nation. The median Rochester home ($256,900) is nearly $160,000 below the national median. 40% of Rochester listing views originate from out-of-state buyers, primarily from NYC, Boston, and Washington D.C. The national softening visible in Sun Belt markets has not reached Rochester — and by all projections, won't in 2026.</p>
+    <p class="story-text">Realtor.com ranked Rochester #2, projecting 5.3% home sales growth and 10.3% median sale price appreciation — the strongest price forecast in the nation. The median Rochester home ($256,900) is nearly $160,000 below the national median. 40% of Rochester listing views originate from out-of-state buyers, primarily from NYC, Boston, and Washington D.C.</p>
   </div>
 </article>
 ```
@@ -602,11 +547,10 @@ animation: fadeIn 0.5s ease both;
   <footer>
     <div class="rule"></div>
     <p class="footer-text">Elysian Homes · Rochester, NY · For informational purposes only</p>
-    <p class="footer-text small">Data: Zillow · MND · Bankrate · Freddie Mac · BEA · BLS · Federal Reserve · NAR · Redfin · GRAR · Inman · RBJ · WXXI · Return to chat for a fresh digest</p>
+    <p class="footer-text small">Rates: MND only · Data: Freddie Mac · BEA · BLS · Fed · NAR · Redfin · GRAR · Inman · RBJ · WXXI</p>
   </footer>
 
 </div>
-
 <script>
   function toggle(btn) {
     const card = btn.closest('.story-card');
@@ -618,6 +562,5 @@ animation: fadeIn 0.5s ease both;
     card.style.borderColor = isOpen ? '' : '#2A2A2A';
   }
 </script>
-
 </body>
 </html>
